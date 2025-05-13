@@ -1,6 +1,7 @@
 import { NumpadButton } from './NumpadButton/NumpadButton';
 import { FunctionButton } from './FunctionButton/FunctionButton';
 import './style.css';
+import { useState } from 'react';
 
 /*
   Zadání: Zprovozněte číselník tak, aby se po kliknutí na tlačítka správně skládalo číslo 
@@ -24,7 +25,7 @@ import './style.css';
   Krok 5: Do komponenty `FunctionButton` přidejte prop `onFunctionClick`, která bude očekávat
     funkci bez parametrů. Tímto říkáme, že uživatel kliknul na nějaké funkční tlačítko. 
 
-  Krok 6: V komponentě `Ukol4` založte funkci `handleClearClick` bez paramtrů. V ní nastavte
+  Krok 6: V komponentě `Ukol4` založte funkci `handleClearClick` bez parametrů. V ní nastavte
     stav `displayValue` na nulu. Tuto funkci pak předejte komponentě `FunctionButton` jako
     prop `onFunctionClick`
 
@@ -32,21 +33,34 @@ import './style.css';
 */
 
 export const Ukol4 = () => {
+  const [displayValue, setDisplayValue] = useState('0');
+
+  const handleDigitClick = (digit) => {
+    if (displayValue === '0') {
+      setDisplayValue(digit);
+    } else {
+      setDisplayValue(displayValue + String(digit));
+    }
+  };
+
+  const handleClearClick = () => {
+    setDisplayValue('0');
+  };
   return (
     <>
-      <div className="display">0</div>
+      <div className="display">{displayValue}</div>
       <div className="numpad">
-        <NumpadButton digit={1} />
-        <NumpadButton digit={2} />
-        <NumpadButton digit={3} />
-        <NumpadButton digit={4} />
-        <NumpadButton digit={5} />
-        <NumpadButton digit={6} />
-        <NumpadButton digit={7} />
-        <NumpadButton digit={8} />
-        <NumpadButton digit={9} />
-        <NumpadButton digit={0} />
-        <FunctionButton label="C" />
+        <NumpadButton digit={1} onDigitClick={handleDigitClick} />
+        <NumpadButton digit={2} onDigitClick={handleDigitClick} />
+        <NumpadButton digit={3} onDigitClick={handleDigitClick} />
+        <NumpadButton digit={4} onDigitClick={handleDigitClick} />
+        <NumpadButton digit={5} onDigitClick={handleDigitClick} />
+        <NumpadButton digit={6} onDigitClick={handleDigitClick} />
+        <NumpadButton digit={7} onDigitClick={handleDigitClick} />
+        <NumpadButton digit={8} onDigitClick={handleDigitClick} />
+        <NumpadButton digit={9} onDigitClick={handleDigitClick} />
+        <NumpadButton digit={0} onDigitClick={handleDigitClick} />
+        <FunctionButton label="C" onFunctionClick={handleClearClick} />
       </div>
     </>
   );
