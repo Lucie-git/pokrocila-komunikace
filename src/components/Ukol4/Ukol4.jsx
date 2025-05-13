@@ -1,6 +1,6 @@
-import { NumpadButton } from "./NumpadButton";
-import { FunctionButton } from "./FunctionButton";
-import "./style.css";
+import { NumpadButton } from './NumpadButton/NumpadButton';
+import { FunctionButton } from './FunctionButton/FunctionButton';
+import './style.css';
 
 /*
   Zadání: Zprovozněte číselník tak, aby se po kliknutí na tlačítka správně skládalo číslo 
